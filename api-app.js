@@ -7,7 +7,8 @@ const FAKE_RESPONSE = '{"success":true,"timestamp":1561925944,"base":"EUR","date
  * Creates a router with several API endpoints
  */
 class APIRouter {
-  constructor () {
+  constructor (dataUrl) {
+    this.dataUrl = dataUrl
     this.router = express.Router()
     this._setRouterEndpoints()
   }
@@ -18,7 +19,9 @@ class APIRouter {
       if (base == undefined || base == null) {
         throw new Error("Missing 'base' parameter");
       }
-      res.json(this.fetchRates(base))
+      this.fetchRates(base)
+        .then(response => res.json(response))
+        .catch(e => res.status(500).json(e.message))
     })
   }
 
@@ -49,8 +52,16 @@ class APIRouter {
   }
 
   fetchRates(base) {
-    //this._doHttpRequest() // TODO: use URI that should be injected in constructor
-    return FAKE_RESPONSE
+    let url = this.dataUrl + '&base=' + base 
+    return this._doHttpRequest(url)
+      .then(response => {
+        let jsonResp = JSON.parse(response)
+        if (jsonResp.success != true) {
+          console.error('Failed to fetch data from external server: ' + response)
+          throw new Error('Could not fetch currency data from servers')
+        }
+        return jsonResp
+      })
   }
 
 }
