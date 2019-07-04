@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Currency Calculator</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="js/index.js"></script>
 </head>
 
@@ -22,16 +23,15 @@
             <form>
                 <div>
                     <div>
-                        <input type="number" ng-model="currencyAmount" placeholder="Amount">
-                        <select ng-disabled>
-                            <option ng-selected>EUR</option>
+                        <input type="number" ng-model="currencyAmount" placeholder="Amount" ng-change="updateResult()">
+                        <select ng-disabled ng-model="currencyBase">
+                            <option ng-selected>{{currencyBase}}</option>
                         </select>
-                    </div>
-                    <div>
-                        <input type="text" disabled placeholder="into">
-                        <select>
-                            <option>USD</option>
+                        ->
+                        <select ng-model="currencyToSelected" ng-change="updateResult()" placeholder="into">
+                            <option ng-repeat="currencyTo in currencyToList">{{currencyTo}}</option>
                         </select>
+                        <input type="text" disabled ng-model="resultAmount">
                     </div>
                 </div>
             </form>
