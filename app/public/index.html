@@ -24,8 +24,8 @@
                 <div>
                     <div>
                         <input type="number" ng-model="currencyAmount" placeholder="Amount" ng-change="updateResult()">
-                        <select ng-disabled ng-model="currencyBase">
-                            <option ng-selected>{{currencyBase}}</option>
+                        <select ng-disabled ng-model="currencyBaseSelected" ng-change="fetchRates()">
+                            <option ng-repeat="currencyBase in currencyBaseList">{{currencyBase}}</option>
                         </select>
                         ->
                         <select ng-model="currencyToSelected" ng-change="updateResult()" placeholder="into">
@@ -33,11 +33,13 @@
                         </select>
                         <input type="text" disabled ng-model="resultAmount">
                     </div>
+                    <div>
+                        <p align="center" style="color: red">{{errorMsg}}</p>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-<!--TODO: dynamic values for select options and converted value -->
 </div>
 
 </body>
