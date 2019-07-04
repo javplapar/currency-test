@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="CurrencyApp">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <title>Currency Calculator</title>
+
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div id='top' class="text-center">
+        <h1 align="center">Currency Calculator</h1>
+    </div>
+
+    <!-- FORM -->
+    <div ng-controller="MainController" align="center">
+        <div>
+            <form>
+                <div>
+                    <div>
+                        <input type="number" ng-model="currencyAmount" placeholder="Amount">
+                        <select ng-disabled>
+                            <option ng-selected>EUR</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" disabled placeholder="into">
+                        <select>
+                            <option>USD</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<!--TODO: dynamic values for select options and converted value -->
+</div>
+
+</body>
+</html>
