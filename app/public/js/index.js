@@ -18,9 +18,9 @@ angular
 
         function init() {
             ApiService.fetchCurrencies()
-                .success(function(response) {
-                    console.log('fetchCurrencies', response)
-                    $scope.currencyBaseList = Object.keys(response.rates)
+                .success(function(rates) {
+                    console.log('fetchCurrencies', rates)
+                    $scope.currencyBaseList = Object.keys(rates) // this could/should be a different endpoint to just get the available base currencies
                     if ($scope.currencyBaseList.includes('EUR')) { // pre-select EUR if available since is the only one with free license
                         $scope.currencyBaseSelected = 'EUR'
                     } else {
@@ -35,10 +35,10 @@ angular
 
         function fetchRates() {
             ApiService.fetchRates($scope.currencyBaseSelected)
-                .success(function(response) {
+                .success(function(rates) {
                     $scope.errorMsg = undefined
-                    console.log('fetchRates', response)
-                    $scope.rates = response.rates
+                    console.log('fetchRates', rates)
+                    $scope.rates = rates
                     $scope.currencyToList = Object.keys($scope.rates)
                 }).catch(function(e) {
                     console.error(e)
