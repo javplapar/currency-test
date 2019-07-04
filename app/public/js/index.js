@@ -60,12 +60,12 @@ angular
         /* METHODS */
 
         service.fetchCurrencies = function() {
-            var url = '/api/currency?base=' + 'EUR'
+            var url = '/api/rates?base=' + 'EUR' // could be reused, but it really should not be the same endpoint
             return $http.get(url)
         }
 
         service.fetchRates = function(currency) {
-            var url = '/api/currency?base=' + currency
+            var url = '/api/rates?base=' + currency
             return $http.get(url)
         }
 

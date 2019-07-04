@@ -12,7 +12,7 @@ class APIRouter {
   }
 
   _setRouterEndpoints() {
-    this.router.get('/currency', (req, res) => {
+    this.router.get('/rates', (req, res) => {
       let base = req.query.base
       if (base == undefined || base == null) {
         throw new Error("Missing 'base' parameter");
