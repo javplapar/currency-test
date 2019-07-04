@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "fb8dd470-5acc-4adb-bc95-4b2c4fe7e79b",
+		"name": "test-advinans",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/rates EUR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "526f6158-04d6-4074-b28c-5636586700a0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/rates?base=EUR",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rates"
+					],
+					"query": [
+						{
+							"key": "base",
+							"value": "EUR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inexisting endpoint 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "526f6158-04d6-4074-b28c-5636586700a0",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/inexisting-endpoint",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inexisting-endpoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/app fetches html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "526f6158-04d6-4074-b28c-5636586700a0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"<html\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/app",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/rates CLP (no license)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01ad21d5-0fb3-4746-8517-ed0b571413e4",
+						"exec": [
+							"pm.test(\"Status code is 500, since license does not allow rates for CLP\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/rates?base=CLP",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rates"
+					],
+					"query": [
+						{
+							"key": "base",
+							"value": "CLP"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
