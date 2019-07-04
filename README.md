@@ -3,14 +3,14 @@ Angular 1.5 which allows for conversion of currencies. This server talks to an e
 
 ## Installation
 To install do
-'''
+```
 npm install
-'''
+```
 
 ## Start up
 and to start the server do
-'''
+```
 node app/app.js
-'''
+```
 
 and then to visit the web app go to localhost:8080/app
